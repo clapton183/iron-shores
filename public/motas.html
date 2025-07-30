@@ -3,28 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Calculadora Motoclube</title>
-  <script src="script.js" defer></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { padding: 10px; margin: 5px 0; }
+  </style>
 </head>
 <body>
-  <h1>Calculadora de Preços</h1>
-  <label>Motar:
-    <input type="text" id="motar">
-  </label>
-  <br>
-  <label>Preço Base (€):
-    <input type="number" id="preco" value="1000">
-  </label>
-  <br>
-  <label>Multiplicador:
-    <select id="multiplicador">
-      <option value="1">x1</option>
-      <option value="1.5">x1.5</option>
-      <option value="2">x2</option>
-    </select>
-  </label>
-  <br>
-  <button onclick="calcular()">Calcular</button>
-  <p>Total: <span id="total">0</span> €</p>
-  <button onclick="guardar()">Guardar</button>
+  <h1>Calculadora de Preço</h1>
+
+  <label for="motar">Nome do Motar:</label><br>
+  <input type="text" id="motar" placeholder="Ex: Clapton"><br>
+
+  <label for="total">Preço Total (€):</label><br>
+  <input type="number" id="total" step="0.01" placeholder="Ex: 120"><br>
+
+  <button onclick="guardarTransacao()">Guardar</button>
+
+  <p id="mensagem"></p>
+
+  <script>
+    async function guardarTransacao() {
+      const motar = document.getElementById('motar').value.trim();
+      const total = parseFloat(document.getElementById('total').value);
+
+      if (!motar || isNaN(total)) {
+        document.getElementById('mensagem').innerText = 'Preenche todos os campos corretamente.';
+        return;
+      }
+
+      const resposta = await fetch('/api/transaction', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ motar, total })
+      });
+
+      const dados = await resposta.json();
+      if (dados.success) {
+        document.getElementById('mensagem').innerText = 'Guardado com sucesso! ID: ' + dados.id;
+      } else {
+        document.getElementById('mensagem').innerText = 'Erro ao guardar.';
+      }
+    }
+  </script>
 </body>
 </html>
