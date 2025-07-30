@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Motoclube</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Calculadora de Preços</h1>
+  <label>Motar:
+    <input type="text" id="motar">
+  </label>
+  <br>
+  <label>Preço Base (€):
+    <input type="number" id="preco" value="1000">
+  </label>
+  <br>
+  <label>Multiplicador:
+    <select id="multiplicador">
+      <option value="1">x1</option>
+      <option value="1.5">x1.5</option>
+      <option value="2">x2</option>
+    </select>
+  </label>
+  <br>
+  <button onclick="calcular()">Calcular</button>
+  <p>Total: <span id="total">0</span> €</p>
+  <button onclick="guardar()">Guardar</button>
+</body>
+</html>
