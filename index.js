@@ -25,6 +25,15 @@ app.post('/api/transaction', (req, res) => {
     });
 });
 
+app.get('/api/historico', async (req, res) => {
+  try {
+    const resultado = await pool.query('SELECT * FROM transacoes ORDER BY data DESC');
+    res.json(resultado.rows);
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao buscar histórico.' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log('Servidor a correr na porta ' + PORT);
 });
