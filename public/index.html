@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&family=Roboto+Condensed:wght@400&family=Anton&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motoclub Modification Menu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Header with Logo and Menu -->
+  <header>
+    <div class="logo">
+      <img src="img/logo2.png" alt="Motoclub Logo" />
+      <h1>IRON SHORES MC</h1>
+    </div>
+    <nav>
+      <ul class="menu">
+        <li><a href="motas.html">Motas</a></li>
+        <li><a href="">Faturas</a></li>
+      </ul>
+    </nav>
+  </header>
+  <br>
+  <br>
+  <!-- Phase 1: Options for Modifications -->
+  <div class="menu-section" id="modifications">
+    <h2>Modificações</h2>
+    <br>
+    <div class="select-wrapper">
+      <select id="motoClass" onchange="updatePrices(this.value)" required>
+        <option value="none">Escolher classe</option> 
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+      </select>
+    </div>
+    <br>
+    <h2></h2>
+    <div class="item">
+      Chapas (5000):
+      <span id="Chapas">0</span>
+      <button onclick="updateItem('Chapas', 5000, 1)">+</button>
+      <button onclick="updateItem('Chapas', 5000, -1)">-</button>
+    </div>
+    <label class="item">
+      <p>Full Tune (<span id="fullTunePrice">Escolher classe</span>)</p>
+      <input type="checkbox" id="fullTuneCheckbox" value="" onchange="updateCheckboxItem(this, 'Full Tune')">
+    </label>
+    <label class="item">
+      <p>Turbo (<span id="turboPrice">Escolher classe</span>)</p> 
+      <input type="checkbox" id="turboCheckbox" value="" onchange="updateCheckboxItem(this, 'Turbo')">
+    </label>
+    <label class="item">
+      <p>Motor (<span id="motorPrice">Escolher classe</span>)</p> 
+      <input type="checkbox" id="motorCheckbox" value="" onchange="updateCheckboxItem(this, 'Motor')">
+    </label>
+    <label class="item">
+      <p>Transmissão (<span id="transmissaoPrice">Escolher classe</span>)</p> 
+      <input type="checkbox" id="transmissaoCheckbox" value="" onchange="updateCheckboxItem(this, 'Transmissão')">
+    </label>
+    <label class="item">
+      Armadura (50000) <input type="checkbox" value="50000" onchange="updateCheckboxItem(this, 'Armadura')">
+    </label>
+    <label class="item">
+      Travões (15000) <input type="checkbox" value="15000" onchange="updateCheckboxItem(this, 'Travões')">
+    </label>
+    <label class="item">
+      Primário (7500) <input type="checkbox" value="7500" onchange="updateCheckboxItem(this, 'Primario')">
+    </label>
+    <label class="item">
+      Secundário (7500) <input type="checkbox" value="7500" onchange="updateCheckboxItem(this, 'Secundario')">
+    </label>
+    <label class="item">
+      Perolado (7500) <input type="checkbox" value="7500" onchange="updateCheckboxItem(this, 'Perolado')">
+    </label>
+    <label class="item">
+      Autocolante (10000) <input type="checkbox" value="10000" onchange="updateCheckboxItem(this, 'Autocolante')">
+    </label>
+    <label class="item">
+      Xenon (35000) <input type="checkbox" value="35000" onchange="updateCheckboxItem(this, 'Xenon')">
+    </label>
+    <label class="item">
+      Jantes (15000) <input type="checkbox" value="15000" onchange="updateCheckboxItem(this, 'Jantes')">
+    </label>
+    <label class="item">
+      Cor das Jantes (5000) <input type="checkbox" value="5000" onchange="updateCheckboxItem(this, 'Cor das Jantes')">
+    </label>
+    <label class="item">
+      Cor da Matricula (7500) <input type="checkbox" value="7500"
+        onchange="updateCheckboxItem(this, 'Cor da Matricula')">
+    </label>
+    <label class="item">
+      Pneus à prova de bala (50000) <input type="checkbox" value="50000"
+        onchange="updateCheckboxItem(this, 'Pneus à prova de bala')">
+    </label>
+    <label class="item">
+      Buzina (3000) <input type="checkbox" value="3000" onchange="updateCheckboxItem(this, 'Buzina')">
+    </label>
+    <label class="item">
+      Fumaça (30000) <input type="checkbox" value="30000" onchange="updateCheckboxItem(this, 'Fumaça')">
+    </label>
+    <label class="item">
+      Vidro (30000) <input type="checkbox" value="30000" onchange="updateCheckboxItem(this, 'Vidro')">
+    </label>
+  </div>
+
+  <!-- Phase 2: Multiplier Options -->
+  <div class="menu-section" id="multipliers">
+    <h2>Multiplicadores</h2>
+    <label class="item2"> Prospect (-50%) <input id="prospectCheckBox" type="checkbox" value="0.50"
+        onclick="updateMultiplier(this)"></label><br>
+    <label class="item2"> Comissão (+10%) <input id="comissaoCheckBox" type="checkbox" value="1.1"
+        onclick="updateMultiplier(this)"></label><br>
+    <label class="item2"> Parceria (-15%) <input id="parceriaCheckBox" type="checkbox" value="0.85"
+        onclick="updateMultiplier(this)"></label><br>
+  </div>
+
+  <!-- Phase 3: Total Price Display -->
+  <div class="menu-section" id="total">
+    <h2>Preço Total</h2>
+    <p>Total (Fatura): <span id="totalPrice">0</span></p>
+    <p>Total (+IVA): <span id="totalPriceIVA">0</span></p>
+    <p>
+      <input type="text" id="motarName" placeholder="Nome Motard" required>
+      <br>
+      <br>
+      Date: <span id="currentDate"></span>
+      <br>
+      <br>
+    </p>
+    <button onclick="clearAll()">Clear</button>
+    <button onclick="sendTotal()">Save</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
